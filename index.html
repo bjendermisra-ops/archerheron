@@ -1,61 +1,55 @@
-
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>Archer_Hero</title>
-<!-- Viewport setting for all mobiles -->
+<!-- Viewport ko lock kar diya hai -->
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no, viewport-fit=cover">
 
 <meta name="generator" content="Construct 3">
-<meta name="author" content="Joffre Macedo Neto">
-<meta name="description" content="HTM5 Platform Adventure Game">
 <link rel="manifest" href="appmanifest.json">
-<link rel="apple-touch-icon" sizes="128x128" href="icons/icon-128.png">
-<link rel="apple-touch-icon" sizes="256x256" href="icons/icon-256.png">
-<link rel="icon" type="image/png" href="icons/icon-256.png">
-
 <link rel="stylesheet" href="style.css">
 
 </head>
-<body style="background-color: black; overflow: hidden;">
+<body>
 	
-	<noscript>
-		<div id="notSupportedWrap">
-			<h2 id="notSupportedTitle">This content requires JavaScript</h2>
-			<p class="notSupportedMessage">JavaScript appears to be disabled. Please enable it to view this content.</p>
-		</div>
-	</noscript>
-
+	<!-- Game Canvas yaha banta hai automatically -->
+	
 	<script src="scripts/supportcheck.js"></script>
 	<script src="scripts/offlineclient.js" type="module"></script>
 	<script src="scripts/main.js" type="module"></script>
 	<script src="scripts/register-sw.js" type="module"></script>
 
-	<!-- YE HIA MAIN MAGIC SCRIPT - ISKO MAT HATANA -->
+	<!-- NUCLEAR SCRIPT: FORCE RESIZE EVERY 10ms -->
 	<script>
-		function forceFullScreen() {
+		function forceStretch() {
 			var canvas = document.querySelector('canvas');
 			if (canvas) {
-				// Canvas ko force karo ki wo window ka size le le
-				canvas.style.width = window.innerWidth + "px";
-				canvas.style.height = window.innerHeight + "px";
-				canvas.style.position = "fixed";
-				canvas.style.top = "0px";
-				canvas.style.left = "0px";
-				canvas.style.margin = "0px";
-				// Engine ka transform hatane ke liye
-				canvas.style.transform = "none"; 
+				// Style attributes ko zabardasti set karo
+				canvas.style.setProperty("width", "100vw", "important");
+				canvas.style.setProperty("height", "100vh", "important");
+				canvas.style.setProperty("position", "fixed", "important");
+				canvas.style.setProperty("top", "0", "important");
+				canvas.style.setProperty("left", "0", "important");
+				canvas.style.setProperty("margin", "0", "important");
+				canvas.style.setProperty("object-fit", "fill", "important");
+				
+				// Engine ka transform hatana zaruri hai
+				canvas.style.transform = "none";
+				canvas.style.webkitTransform = "none";
 			}
 		}
 
-		// Jaise hi page load ho
-		window.addEventListener('load', forceFullScreen);
-		// Jab bhi phone ghumaaye (resize)
-		window.addEventListener('resize', forceFullScreen);
-		// Har aadhe second mein check karo (Safety ke liye)
-		setInterval(forceFullScreen, 500);
+		// Loop: Har 10ms me function chalao (Game loop ko beat karne ke liye)
+		setInterval(forceStretch, 10);
+		
+		// Load aur Resize par bhi chalao
+		window.addEventListener('resize', forceStretch);
+		window.addEventListener('load', forceStretch);
+		window.addEventListener('orientationchange', function() {
+			setTimeout(forceStretch, 100);
+			setTimeout(forceStretch, 500);
+		});
 	</script>
-
 </body>
 </html>
