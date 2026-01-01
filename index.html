@@ -3,37 +3,47 @@
 <head>
 <meta charset="UTF-8">
 <title>Archer_Hero</title>
-<!-- Niche wali line change ki hai taaki har device par fit ho -->
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no, viewport-fit=cover">
 
 <meta name="generator" content="Construct 3">
-	<meta name="author" content="Joffre Macedo Neto">
-	<meta name="description" content="HTM5 Platform Adventure Game">
-	<link rel="manifest" href="appmanifest.json">
-	<link rel="apple-touch-icon" sizes="128x128" href="icons/icon-128.png">
-	<link rel="apple-touch-icon" sizes="256x256" href="icons/icon-256.png">
-	<link rel="icon" type="image/png" href="icons/icon-256.png">
-
+<link rel="manifest" href="appmanifest.json">
 <link rel="stylesheet" href="style.css">
-
-<style>
-	/* Ye extra safety hai agar style.css load na ho */
-	body, html { margin: 0; padding: 0; overflow: hidden; background-color: black; }
-</style>
-
 </head>
-<body>
-<div id="fb-root"></div>
+<body style="overflow:hidden; background-color: black;">
 
-	<noscript>
-		<div id="notSupportedWrap">
-			<h2 id="notSupportedTitle">This content requires JavaScript</h2>
-			<p class="notSupportedMessage">JavaScript appears to be disabled. Please enable it to view this content.</p>
-		</div>
-	</noscript>
+	<div id="fb-root"></div>
+
 	<script src="scripts/supportcheck.js"></script>
 	<script src="scripts/offlineclient.js" type="module"></script>
 	<script src="scripts/main.js" type="module"></script>
 	<script src="scripts/register-sw.js" type="module"></script>
+
+	<!-- FINAL FIX SCRIPT: RESIZE INTERNAL RESOLUTION -->
+	<script>
+		function resizeGame() {
+			var canvas = document.querySelector("canvas");
+			if (canvas) {
+				// Step 1: Screen ka size lo
+				var screenWidth = window.innerWidth;
+				var screenHeight = window.innerHeight;
+
+				// Step 2: Canvas ke andar ka size update karo (Ye click theek karega)
+				canvas.width = screenWidth;
+				canvas.height = screenHeight;
+
+				// Step 3: Canvas ka bahar ka style set karo
+				canvas.style.width = screenWidth + "px";
+				canvas.style.height = screenHeight + "px";
+			}
+		}
+
+		// Game load hone par aur screen ghumne par size update karo
+		window.addEventListener('resize', resizeGame);
+		window.addEventListener('load', function() {
+			setTimeout(resizeGame, 100); // Thoda ruk ke, taaki game load ho jaye
+			setTimeout(resizeGame, 500);
+			setInterval(resizeGame, 1000); // Har 1 second check karo (Backup)
+		});
+	</script>
 </body>
 </html>
