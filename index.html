@@ -3,53 +3,37 @@
 <head>
 <meta charset="UTF-8">
 <title>Archer_Hero</title>
-<!-- Viewport ko lock kar diya hai -->
+<!-- Niche wali line change ki hai taaki har device par fit ho -->
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no, viewport-fit=cover">
 
 <meta name="generator" content="Construct 3">
-<link rel="manifest" href="appmanifest.json">
+	<meta name="author" content="Joffre Macedo Neto">
+	<meta name="description" content="HTM5 Platform Adventure Game">
+	<link rel="manifest" href="appmanifest.json">
+	<link rel="apple-touch-icon" sizes="128x128" href="icons/icon-128.png">
+	<link rel="apple-touch-icon" sizes="256x256" href="icons/icon-256.png">
+	<link rel="icon" type="image/png" href="icons/icon-256.png">
+
 <link rel="stylesheet" href="style.css">
+
+<style>
+	/* Ye extra safety hai agar style.css load na ho */
+	body, html { margin: 0; padding: 0; overflow: hidden; background-color: black; }
+</style>
 
 </head>
 <body>
-	
-	<!-- Game Canvas yaha banta hai automatically -->
-	
+<div id="fb-root"></div>
+
+	<noscript>
+		<div id="notSupportedWrap">
+			<h2 id="notSupportedTitle">This content requires JavaScript</h2>
+			<p class="notSupportedMessage">JavaScript appears to be disabled. Please enable it to view this content.</p>
+		</div>
+	</noscript>
 	<script src="scripts/supportcheck.js"></script>
 	<script src="scripts/offlineclient.js" type="module"></script>
 	<script src="scripts/main.js" type="module"></script>
 	<script src="scripts/register-sw.js" type="module"></script>
-
-	<!-- NUCLEAR SCRIPT: FORCE RESIZE EVERY 10ms -->
-	<script>
-		function forceStretch() {
-			var canvas = document.querySelector('canvas');
-			if (canvas) {
-				// Style attributes ko zabardasti set karo
-				canvas.style.setProperty("width", "100vw", "important");
-				canvas.style.setProperty("height", "100vh", "important");
-				canvas.style.setProperty("position", "fixed", "important");
-				canvas.style.setProperty("top", "0", "important");
-				canvas.style.setProperty("left", "0", "important");
-				canvas.style.setProperty("margin", "0", "important");
-				canvas.style.setProperty("object-fit", "fill", "important");
-				
-				// Engine ka transform hatana zaruri hai
-				canvas.style.transform = "none";
-				canvas.style.webkitTransform = "none";
-			}
-		}
-
-		// Loop: Har 10ms me function chalao (Game loop ko beat karne ke liye)
-		setInterval(forceStretch, 10);
-		
-		// Load aur Resize par bhi chalao
-		window.addEventListener('resize', forceStretch);
-		window.addEventListener('load', forceStretch);
-		window.addEventListener('orientationchange', function() {
-			setTimeout(forceStretch, 100);
-			setTimeout(forceStretch, 500);
-		});
-	</script>
 </body>
 </html>
