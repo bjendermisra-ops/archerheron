@@ -4,37 +4,58 @@
 <head>
 <meta charset="UTF-8">
 <title>Archer_Hero</title>
-<!-- Niche wali line change ki hai taaki har device par fit ho -->
+<!-- Viewport setting for all mobiles -->
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no, viewport-fit=cover">
 
 <meta name="generator" content="Construct 3">
-	<meta name="author" content="Joffre Macedo Neto">
-	<meta name="description" content="HTM5 Platform Adventure Game">
-	<link rel="manifest" href="appmanifest.json">
-	<link rel="apple-touch-icon" sizes="128x128" href="icons/icon-128.png">
-	<link rel="apple-touch-icon" sizes="256x256" href="icons/icon-256.png">
-	<link rel="icon" type="image/png" href="icons/icon-256.png">
+<meta name="author" content="Joffre Macedo Neto">
+<meta name="description" content="HTM5 Platform Adventure Game">
+<link rel="manifest" href="appmanifest.json">
+<link rel="apple-touch-icon" sizes="128x128" href="icons/icon-128.png">
+<link rel="apple-touch-icon" sizes="256x256" href="icons/icon-256.png">
+<link rel="icon" type="image/png" href="icons/icon-256.png">
 
 <link rel="stylesheet" href="style.css">
 
-<style>
-	/* Ye extra safety hai agar style.css load na ho */
-	body, html { margin: 0; padding: 0; overflow: hidden; background-color: black; }
-</style>
-
 </head>
-<body>
-<div id="fb-root"></div>
-
+<body style="background-color: black; overflow: hidden;">
+	
 	<noscript>
 		<div id="notSupportedWrap">
 			<h2 id="notSupportedTitle">This content requires JavaScript</h2>
 			<p class="notSupportedMessage">JavaScript appears to be disabled. Please enable it to view this content.</p>
 		</div>
 	</noscript>
+
 	<script src="scripts/supportcheck.js"></script>
 	<script src="scripts/offlineclient.js" type="module"></script>
 	<script src="scripts/main.js" type="module"></script>
 	<script src="scripts/register-sw.js" type="module"></script>
+
+	<!-- YE HIA MAIN MAGIC SCRIPT - ISKO MAT HATANA -->
+	<script>
+		function forceFullScreen() {
+			var canvas = document.querySelector('canvas');
+			if (canvas) {
+				// Canvas ko force karo ki wo window ka size le le
+				canvas.style.width = window.innerWidth + "px";
+				canvas.style.height = window.innerHeight + "px";
+				canvas.style.position = "fixed";
+				canvas.style.top = "0px";
+				canvas.style.left = "0px";
+				canvas.style.margin = "0px";
+				// Engine ka transform hatane ke liye
+				canvas.style.transform = "none"; 
+			}
+		}
+
+		// Jaise hi page load ho
+		window.addEventListener('load', forceFullScreen);
+		// Jab bhi phone ghumaaye (resize)
+		window.addEventListener('resize', forceFullScreen);
+		// Har aadhe second mein check karo (Safety ke liye)
+		setInterval(forceFullScreen, 500);
+	</script>
+
 </body>
 </html>
