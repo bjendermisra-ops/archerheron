@@ -1,17 +1,33 @@
+/* 1. Page aur Body ko Full Size set karna */
 html, body {
+	width: 100%;
+	height: 100%;
 	padding: 0;
 	margin: 0;
 	overflow: hidden;
-	
 	background: #000000;
 	color: white;
 }
 
+/* 2. Game Screen (Canvas) ko zabardasti Full Screen karna */
+canvas {
+	width: 100% !important;
+	height: 100% !important;
+	position: absolute;
+	top: 0;
+	left: 0;
+	display: block;
+	/* Ye ensure karega ki game bina black bar ke dikhe */
+}
+
+/* 3. Touch Actions (Mobile ke liye zaruri) */
 html, body, canvas {
 	touch-action: none;
 	touch-action-delay: none;
+	-ms-touch-action: none;
 }
 
+/* 4. Agar JavaScript band ho to ye message dikhega (Purana code) */
 #notSupportedWrap {
 	margin: 2em auto 1em auto;
 	width: 75%;
@@ -36,11 +52,13 @@ html, body, canvas {
 	color: #888;
 }
 
+/* 5. Text Selection Block karna (Game khelte waqt text select na ho) */
 *:not(input):not(textarea) {
--moz-user-select: -moz-none;
--khtml-user-select: none;
--webkit-user-select: none;
--o-user-select: none;
--ms-user-select: none;
-user-select: none
+	-moz-user-select: -moz-none;
+	-khtml-user-select: none;
+	-webkit-user-select: none;
+	-o-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+	-webkit-tap-highlight-color: rgba(0,0,0,0);
 }
