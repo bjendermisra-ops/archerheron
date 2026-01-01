@@ -1,46 +1,64 @@
-/* NUCLEAR MODE CSS - FORCE FULLSCREEN */
+/* 1. Page aur Body ko Full Size set karna */
 html, body {
-	margin: 0;
+	width: 100%;
+	height: 100%;
 	padding: 0;
-	width: 100vw;
-	height: 100vh;
+	margin: 0;
 	overflow: hidden;
-	background-color: #000;
-	touch-action: none;
-	-ms-touch-action: none;
-	position: fixed; /* Body ko hilne se roko */
+	background: #000000;
+	color: white;
 }
 
+/* 2. Game Screen (Canvas) ko zabardasti Full Screen karna */
 canvas {
-	/* Canvas ko screen se chipka do */
-	position: fixed !important;
-	top: 0 !important;
-	left: 0 !important;
-	bottom: 0 !important;
-	right: 0 !important;
-	
-	/* Width aur Height zabardasti 100% */
-	width: 100vw !important;
-	height: 100vh !important;
-	max-width: 100% !important;
-	max-height: 100% !important;
-	
-	/* Margin hatao */
-	margin: 0 !important;
-	padding: 0 !important;
-	
-	/* STRETCH MODE ON - Ye black bars hatayega */
-	object-fit: fill !important; 
-	
-	/* Engine ka transform code disable karo */
-	transform: none !important;
-	
-	/* Layer sabse upar */
-	z-index: 9999 !important;
-	display: block !important;
+	width: 100% !important;
+	height: 100% !important;
+	position: absolute;
+	top: 0;
+	left: 0;
+	display: block;
+	/* Ye ensure karega ki game bina black bar ke dikhe */
 }
 
-/* Scrollbars gayab */
-::-webkit-scrollbar {
-    display: none;
+/* 3. Touch Actions (Mobile ke liye zaruri) */
+html, body, canvas {
+	touch-action: none;
+	touch-action-delay: none;
+	-ms-touch-action: none;
+}
+
+/* 4. Agar JavaScript band ho to ye message dikhega (Purana code) */
+#notSupportedWrap {
+	margin: 2em auto 1em auto;
+	width: 75%;
+	max-width: 45em;
+	border: 2px solid #aaa;
+	border-radius: 1em;
+	padding: 2em;
+	background-color: #f0f0f0;
+	font-family: "Segoe UI", Frutiger, "Frutiger Linotype", "Dejavu Sans", "Helvetica Neue", Arial, sans-serif;
+	color: black;
+}
+
+#notSupportedTitle {
+	font-size: 1.8em;
+}
+
+.notSupportedMessage {
+	font-size: 1.2em;
+}
+
+.notSupportedMessage em {
+	color: #888;
+}
+
+/* 5. Text Selection Block karna (Game khelte waqt text select na ho) */
+*:not(input):not(textarea) {
+	-moz-user-select: -moz-none;
+	-khtml-user-select: none;
+	-webkit-user-select: none;
+	-o-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+	-webkit-tap-highlight-color: rgba(0,0,0,0);
 }
